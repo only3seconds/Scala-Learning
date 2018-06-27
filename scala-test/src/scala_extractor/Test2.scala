@@ -2,7 +2,7 @@ package scala_extractor
 
 /**
   * 实例化一个类时，可以带上0个或者多个的参数，编译器在实例化的时会调用 apply 方法，可以在类和对象中都定义 apply 方法。
-  * 在提取器对象中使用 match 语句时，unapply 将自动执行 ??? 
+  * 在提取器对象中使用 match 语句时，unapply 将自动执行 ???
   */
 object Test2 {
 

@@ -1,0 +1,2 @@
+Scala is cool, 
+ I like scala!
