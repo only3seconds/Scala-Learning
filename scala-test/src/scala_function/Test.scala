@@ -19,10 +19,14 @@ object Test {
     * @param t
     * @return
     */
+
+  // 省去返回值类型，scala会自动进行类型推断
   def delayed(t: =>Long) = {
     println("在 delayed 方法内"); //打印一条信息表示进入 delayed 方法
     println("参数： " + t);
-    t
+
+    // 可以省去return，scala会将最后一个执行语句作为函数的返回值
+    t;
   }
 
 }
