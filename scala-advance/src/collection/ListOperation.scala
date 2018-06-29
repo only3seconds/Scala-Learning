@@ -1,5 +1,8 @@
 package collection
 
+/**
+  * List 常用操作
+  */
 object ListOperation {
   def main(args: Array[String]): Unit = {
     val nums = 1:: (2:: (3:: (4:: Nil)))
@@ -19,11 +22,11 @@ object ListOperation {
 
     println("取第二个元素：" + nums.tail.head)
 
-    println("取前 n 个元素(方法一）：" + nums take 3)
-    println("取前 n 个元素(方法二）：" + nums.take(3))
+    println("取前 n 个元素(方式一）：" + (nums take 3))
+    println("取前 n 个元素(方式二）：" + nums.take(3))
 
-    println("丢弃前 n 个元素(方法一）：" + nums drop 3)
-    println("丢弃前 n 个元素(方法二）：" + nums.drop(3))
+    println("丢弃前 n 个元素(方式一）：" + (nums drop 3))
+    println("丢弃前 n 个元素(方式二）：" + nums.drop(3))
 
     println("列表元素倒置：" + nums.reverse)
 
@@ -36,7 +39,7 @@ object ListOperation {
 
     println("连接 nums 和 chars：" + nums.:::(chars))
 
-    println("List zip 操作(方式一)：" + nums zip chars)
+    println("List zip 操作(方式一)：" + (nums zip chars))
     println("List zip 操作(方式二)：" + nums.zip(chars))
 
     println("List 插入排序：" + insertSort(testNums))
