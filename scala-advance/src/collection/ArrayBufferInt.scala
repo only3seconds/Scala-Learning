@@ -7,6 +7,10 @@ object ArrayBufferInt {
   def main(args: Array[String]): Unit = {
     var intArrayVar = ArrayBuffer(1, 2, 3)
 
+    // 数组遍历的各种方法
+    for (i <- intArrayVar) println("遍历方法1：" + intArrayVar); //推荐使用
+    for (i <-)
+
     // 在数组为 0 的位置插入元素
     intArrayVar.insert(0, 4)
     intArrayVar.insert(0, 5, 6)
