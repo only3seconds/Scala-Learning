@@ -8,8 +8,16 @@ object ArrayBufferInt {
     var intArrayVar = ArrayBuffer(1, 2, 3)
 
     // 数组遍历的各种方法
-    for (i <- intArrayVar) println("遍历方法1：" + intArrayVar); //推荐使用
-    for (i <-)
+    // 方法一：数组方式，推荐使用
+    for (i <- intArrayVar) println("遍历方法1：" + i);
+    // 方法二: to
+    for (i <- 0 to intArrayVar.length -1) println("遍历方法2：" + intArrayVar(i));
+    // 方法三: until
+    for (i <- 0 until  intArrayVar.length) println("遍历方法3：" + intArrayVar(i));
+    // 方法四：步长为 2
+    for (i <- 0 until (intArrayVar.length, 2)) println("遍历方法4：" + intArrayVar(i));
+    // 方法五：逆序输出
+    for (i <- (0 to intArrayVar.length - 1).reverse) println("遍历方法5：" + intArrayVar(i));
 
     // 在数组为 0 的位置插入元素
     intArrayVar.insert(0, 4)
