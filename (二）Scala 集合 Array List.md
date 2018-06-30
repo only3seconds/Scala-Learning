@@ -1,7 +1,6 @@
 # Scala 集合
+
 可变（mutable)集合 和 不可变(immutable)集合
-
-
 	
 	Scala collections systematically distinguish between mutable and immutable 
 	collections. A mutable collection can be updated or extended in place. 
@@ -412,9 +411,239 @@ object SetOperation {
 	向 LinkedHashSet 插入一个元素：Set(3.0, 5.0, 6.0)
 
 ## 四. Map 映射
+	Map 是一种键值对的集合
+	
+### 1. Option, Some, None 类型
+
+- Some, None 是 Option 的子类
+
+- 在 Java 中，对于定义好的 HashMap, 如果 get 方法传入的键不存在，方法会返回 null, 如果没有对 null 这种情况进行特殊处理，就会有 NullPointerException. 在 scala 中通过 Option 来解决这个问题
+
+- 在 Scala 中通过模式匹配来获得 Option 的最终结果
+
+### 2. 例子
+
+代码：
+
+```scala
+package collection
+
+import scala.collection.mutable
+
+/**
+  * Map 操作
+  */
+object MapOperation {
+
+  def main(args: Array[String]): Unit = {
+
+    // 初始化
+    val studentInfoMutable1 = mutable.Map("Jhon" -> 20, "Stephen" -> 21, "Lucy" -> 22)
+    val studentInfoMutable2 = mutable.Map(("Jhon", 20), ("Stephen", 21), ("Lucy", 22))
+
+    // 遍历操作
+    println("遍历方式一：")
+    for(i <- studentInfoMutable1) println(i)
+
+    println("遍历方式二：")
+    studentInfoMutable1.foreach(e =>
+    {val (k, v) = e
+    println(k + ":" + v)
+    }
+    )
+
+    println("遍历方式三：")
+    studentInfoMutable1.foreach(e =>
+    {
+      println(e._1 + ":" + e._2)
+    }
+    )
+
+
+    // clear: 清空
+    println("clear 清空 studentInfoMutable2 后：" + studentInfoMutable2.clear())
+
+    // put: 添加元素
+    studentInfoMutable2.put("spark", 1)
+
+    // contains: 是否包含该关键字
+    println("Map 中是否包含关键字 spark: " + studentInfoMutable2.contains("spark"))
+
+    // get: 获取元素
+    println("获取 键 spark 对应的 Option：" + studentInfoMutable2.get("spark"))
+    println("获取 键 hive 对应的 Option：" + studentInfoMutable2.get("hive"))
+    println("获取 键 spark 对应的 value：" + show(studentInfoMutable2.get("spark")))
+    println("获取 键 hive 对应的 value：" + show(studentInfoMutable2.get("hive")))
+
+
+  }
+
+  // 模式匹配获取 Option 中的内容， 这个函数的返回类型为 Any
+  def show(x: Option[Int]) = x match {
+    case Some(s) => s
+    case None => "???"
+
+  }
+
+
+}
+```
+
+运行结果：
+
+	遍历方式一：
+	(Stephen,21)
+	(Jhon,20)
+	(Lucy,22)
+	遍历方式二：
+	Stephen:21
+	Jhon:20
+	Lucy:22
+	遍历方式三：
+	Stephen:21
+	Jhon:20
+	Lucy:22
+	clear 清空 studentInfoMutable2 后：()
+	Map 中是否包含关键字 spark: true
+	获取 键 spark 对应的 Option：Some(1)
+	获取 键 hive 对应的 Option：None
+	获取 键 spark 对应的 value：1
+	获取 键 hive 对应的 value：???
+
+
 ## 五. Tuple 元组
+	Tuple 是不同类型值的聚集
+	
+代码：
+
+```scala
+package collection
+
+object TupleOperation {
+
+  def main(args: Array[String]): Unit = {
+
+    // 定义 tuple
+    val tuple = ("Hello", 520, 'a')
+    println("tuple = " + tuple)
+
+    // 访问元组元素
+    println("通过下标访问数组元素：")
+    println("第一个元素为：" + tuple._1)
+    println("第二个元素为：" + tuple._2)
+    println("第三个元素为：" + tuple._3)
+
+    // 通过模式匹配访问元组元素
+    println("通过模式匹配访问元组元素：")
+    val (first, second, third) = tuple
+    println("第一个元素为：" + first)
+    println("第二个元素为：" + second)
+    println("第三个元素为：" + third)
+  }
+
+}
+```
+
+运行结果：
+
+	tuple = (Hello,520,a)
+	通过下标访问数组元素：
+	第一个元素为：Hello
+	第二个元素为：520
+	第三个元素为：a
+	通过模式匹配访问元组元素：
+	第一个元素为：Hello
+	第二个元素为：520
+	第三个元素为：a
+
 ## 六. Queue 队列
+
+代码：
+
+```scala
+package collection
+
+object QueueOperation {
+
+  def main(args: Array[String]): Unit = {
+    var queue1 = scala.collection.mutable.Queue(1, 2, 3)
+    var queue2 = scala.collection.immutable.Queue(1, 2, 3)
+
+    // 出队
+    println("出队（可变队列）：" + queue1.dequeue)
+    println("出队（不可变队列）：" + queue2.dequeue)
+
+    // 入队
+    queue1.enqueue(4)
+    println("入队（可变队列）：" + queue1)
+    println("入队（不可变队列）：" + queue2.enqueue(4))
+
+    println("可变队列：" + (queue1 += 5))
+    //queue2 += 5 报错，不可变队列是不能修改的
+
+    // 集合方式
+    println("可变队列追加一个集合：" + (queue1 ++= List(6, 7, 8)))
+
+    queue2 ++= List(6, 7, 8) // 将会生成一个新的队列，注意 ++ 操作 与 + 操作的区别
+    println("不可变队列追加一个集合：" + queue2)
+
+  }
+}
+```
+
+运行结果：
+
+	出队（可变队列）：1
+	出队（不可变队列）：(1,Queue(2, 3))
+	入队（可变队列）：Queue(2, 3, 4)
+	入队（不可变队列）：Queue(1, 2, 3, 4)
+	可变队列：Queue(2, 3, 4, 5)
+	可变队列追加一个集合：Queue(2, 3, 4, 5, 6, 7, 8)
+	不可变队列追加一个集合：Queue(1, 2, 3, 6, 7, 8)
+	
+	
 ## 七. Stack 栈
+
+代码：
+
+```scala
+package collection
+
+import scala.collection.mutable.Stack
+
+/**
+  * Stack 操作
+  */
+object StackOperation {
+
+  def main(args: Array[String]): Unit = {
+    // apply 创建方式
+    val stack = Stack(1, 2, 3)
+
+    // 出栈：pop
+    println("pop 出栈：" + stack.pop())
+
+    // 入栈：push
+    println("push 入栈：" + stack.push(4))
+
+    // 取栈顶元素：top
+    println("top 取栈顶元素：" + stack.top)
+    println("top 后的栈：" + stack) //top 操作并不会影响到栈
+
+
+  }
+
+}
+```
+
+运行结果：
+
+	pop 出栈：1
+	push 入栈：Stack(4, 2, 3)
+	top 取栈顶元素：4
+	top 后的栈：Stack(4, 2, 3)
+	
+	
 
 
 
