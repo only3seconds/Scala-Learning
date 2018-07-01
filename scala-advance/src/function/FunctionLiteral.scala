@@ -1,7 +1,7 @@
 package function
 
 /**
-  * 函数字面量
+  * 函数字面量（值函数）
   */
 object FunctionLiteral {
 
@@ -21,8 +21,13 @@ object FunctionLiteral {
     // 数组的 map 方法中调用
     println("数组的 map 方法中调用：" + Array(1, 2, 3).map(increase1).mkString(","))
 
+    // 函数简化
+    val increase3 = 1 + (_: Double)
+    println("调用 increase3: " + increase3(10))
+
+    val increase4: (Double) => Double = 1 + _
+    println("调用 increase4: " + increase4(10))
 
   }
-
 
 }
