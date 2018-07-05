@@ -21,4 +21,14 @@ class Dog(var age: Int) extends Animal {
 // 通过扩展 App 创建程序的入口
 object Dog extends App {
   new Dog(2).eat()
+
+  // 定义一个匿名类
+  val d = new Animal {
+    override def eat: Unit = println("This dog like eating vegetables")
+
+    override var age: Int = 5
+  }
+
+  d.eat
+
 }
