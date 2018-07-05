@@ -1,7 +1,7 @@
 package scala_trait
 
 /**
-  * Scala Trait(特征) 相当于 Java 的接口,与接口不同的是，它还可以定义属性和方法的实现。
+  * Scala Trait(特征）相当于 Java 的接口,与接口不同的是，它还可以定义属性和方法的实现。
   * 可以继承多个 trait
   */
 
