@@ -7,15 +7,10 @@ object FilterFun {
   def main(args: Array[String]): Unit = {
     val array1 = Array(1, 2, 3, 4, 5)
     print("array1 = ")
-    for(i <- array1) {
-      print(i + " ")
-    }
-
+    array1.foreach(x => print(x + " "))
     val array2 = array1.filter(_>3)
     print("\narray2 = ")
-    for(i <- array2) {
-      print(i + " ")
-    }
+    array2.foreach(x => print(x + " "))
   }
 
 }
