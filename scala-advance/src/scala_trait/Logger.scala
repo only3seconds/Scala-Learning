@@ -4,6 +4,8 @@ import java.io.PrintWriter
 
 /**
   * trait 构造顺序
+  *
+  * lazy 懒加载
   */
 
 
@@ -16,8 +18,9 @@ trait Logger {
 
 trait FileLogger extends Logger {
   println("FileLogger")
-  val fileOutput = new PrintWriter("file.log")
-  fileOutput.println("#")
+  val fileName: String
+  lazy val fileOutput = new PrintWriter(fileName)
+  // fileOutput.println("#") 这句也会报 NullPointerException
 
   def log(msg: String): Unit = {
     fileOutput.print(msg)
@@ -25,10 +28,15 @@ trait FileLogger extends Logger {
   }
 }
 
+class Person
+
+class Student extends Person with FileLogger {
+  val fileName = "file.log"
+}
 object TraitDemo {
   def main(args: Array[String]): Unit = {
 
-    // 匿名类
-    new FileLogger {}.log("trait demo")
+    val s = new Student
+    s.log("lazy variable")
   }
 }
