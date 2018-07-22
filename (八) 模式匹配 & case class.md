@@ -61,7 +61,7 @@ x = 10
 - Case class 是一种特殊的类，能够被优化用于模式匹配
 
 
-- 当一个类被声明为 case class 时，scala 会做一下事情：
+- 当一个类被声明为 case class 时，scala 会做以下事情：
 
 	（1）构造器中的参数如果不被声明为 var ，则默认为 val, 不建议声明为 var
 	
