@@ -1,6 +1,8 @@
 package extractor
 
-
+/**
+  * apply 与 unapply 方法
+  */
 object ApplyAndUnapply extends App {
 
   def patternMatching(x:String) = x match {
